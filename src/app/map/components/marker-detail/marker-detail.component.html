@@ -1,0 +1,19 @@
+<section class="container ">
+    <div class="row mt-4 mb-4 ">
+        <div class="w-75 m-auto text-center">
+            <h2>Aqui esta todo lo que buscas</h2>
+        </div>
+        <div class="row mt-4  m-auto ">
+            <div *ngFor="let point of pointsInMap" class="col-lg-4 col-md-12 my-2" >
+                <div class="card" routerLink="/map/info">
+                    <img src="" alt="" class="card-img-top">
+                    <app-mini-mapa [lngLat]="point.lngLat"></app-mini-mapa>
+                    <div class="card-body">
+                        <h5 class="card-title"> {{point.name}}</h5>
+                        <p class="card-text">{{point.description}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

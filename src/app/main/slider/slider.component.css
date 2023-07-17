@@ -1,0 +1,8 @@
+.nav-item {
+    margin: 2px auto;
+  }
+  .carousel-item img {
+    max-height: 500px;
+    opacity: 0.8;
+    object-fit: cover;
+  }
