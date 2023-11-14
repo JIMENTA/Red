@@ -18,7 +18,6 @@ import { MapRoutingModule } from './map-routing.module';
 import { AddMarkerComponent } from './components/add-marker/add-marker.component';
 
 
-
 @NgModule({
   declarations: [
     MarkersMapComponent,

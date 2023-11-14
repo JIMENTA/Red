@@ -19,6 +19,7 @@ const routes : Routes=[
         path:'info',
         component: FullInfoComponent
     },
+ 
     {path:'**', redirectTo:''},
 ]
 

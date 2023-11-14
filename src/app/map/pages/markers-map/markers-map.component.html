@@ -1,7 +1,7 @@
 <div id="map" #map>
 </div>
-<button (click)="createMarker()"> add </button>  
-<!-- routerLink="/map/add"  -->
+<button routerLink="/map/add"> add </button>  
+<!--  (click)="createMarker()"   -->
 <div class="marker" *ngFor="let colorMarker of markers" routerLink="/map/info" >
 </div>
 
