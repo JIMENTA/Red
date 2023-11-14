@@ -1,8 +1,9 @@
 
 import { AfterViewInit, Component, ElementRef,  ViewChild } from '@angular/core';
-import * as mapboxgl from 'mapbox-gl';
+
 import { LngLat, Map, Marker} from 'mapbox-gl';
 import { MarkerColor, PlainMarker } from '../../interfaces/marker.interface';
+import * as mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-markers-map',
@@ -20,7 +21,7 @@ export class MarkersMapComponent  implements AfterViewInit{
 
 
   ngAfterViewInit(): void {
-    if(!this.divMap) throw 'No se ha encontrado el elemento HTML'
+    if(!this.divMap) throw 'No se ha encontrado el elemento HTML';
     this.map = new Map({
       container: this.divMap.nativeElement,
       style: 'mapbox://styles/mapbox/streets-v12', 
@@ -28,8 +29,11 @@ export class MarkersMapComponent  implements AfterViewInit{
       zoom: this.zoom 
   });
      
-    this.readFromLocalStorage();
+  this.readFromLocalStorage();
+  
+ 
   }
+
 
   createMarker(){
     if(!this.map)return;
@@ -39,15 +43,15 @@ export class MarkersMapComponent  implements AfterViewInit{
     this.addMarker(lngLat)
   }
 
-  addMarker(lngLat: LngLat){
+  addMarker(lngLat: LngLat){ //AÑADIR COLORES
     if(!this.map)return;
-    const marker = new Marker({ color: 'red',  draggable:true})
+    const marker = new Marker({ color: '#F39C12',  draggable:true})
     .setLngLat( lngLat) 
-    // .setPopup(
-    // new mapboxgl.Popup() 
-    //   .setHTML(
-    //     `<h4>${ Marker.name}</h4><p>esta descripcion</p>`) //*todo: refactorizar
-    //   )
+    .setPopup(
+    new mapboxgl.Popup() 
+      .setHTML(
+        `<h4>${ Marker.name}</h4><p>Pequeña descripcion de la iniciativa</p>`) //*todo: refactorizar routerLink="/map/info"
+      )
     .addTo(this.map)
     this.markers.push({color: 'red',marker})
     this.saveToLocalStorage()
@@ -69,12 +73,12 @@ export class MarkersMapComponent  implements AfterViewInit{
         lngLat : marker.getLngLat().toArray()
       }
     })
-localStorage.setItem('plainMarkers', JSON.stringify(plainMarkers))
+      localStorage.setItem('plainMarkers', JSON.stringify(plainMarkers))
   }
 
   readFromLocalStorage(){
-    const plainMarkersStrig = localStorage.getItem('plainMarkers') ?? '[]';
-    const plainMarkers : PlainMarker[] = JSON.parse(plainMarkersStrig)
+    const plainMarkersString = localStorage.getItem('plainMarkers') ?? '[]';
+    const plainMarkers : PlainMarker[] = JSON.parse(plainMarkersString)
 
     plainMarkers.forEach(({ lngLat}) => {
       const [ lng, lat] = lngLat
